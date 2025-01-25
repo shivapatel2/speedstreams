@@ -9,288 +9,184 @@ function openMoviePage(movieTitle) {
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>${movieTitle}</title>
             <style>
-               /* Global Body Styling */
-body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #4e73df, #1cc88a); /* Background Gradient */
-    color: #343a40;
-    margin: 0;
-    padding: 0;
-}
+        /* General Page Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: black; /* Black background */
+            color: #fff; /* White text */
+            margin: 0;
+            padding: 0;
+        }
 
-/* Page Header */
-header {
-    background-color: transparent;
-    color: white;
-    padding: 40px 0;
-    text-align: center;
-    position: relative;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    z-index: 10;
-}
+        /* Table Styling */
+        table {
+            width: 80%;
+            margin: 40px auto;
+            border-collapse: collapse;
+            animation: glow 3s ease-in-out infinite; /* Glowing margin animation */
+        }
 
-h1 {
-    font-size: 4rem;
-    margin: 0;
-    font-weight: bold;
-    letter-spacing: 2px;
-    animation: slideIn 1s ease-out; /* Slide-in animation */
-}
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(0, 255, 0, 1);
+            }
+            100% {
+                box-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
+            }
+        }
 
-@keyframes slideIn {
-    0% {
-        transform: translateX(-100%);
-        opacity: 0;
-    }
-    100% {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
+        table, th, td {
+            border: 1px solid #fff; /* White border */
+            text-align: center;
+            padding: 20px;
+        }
 
-/* Search Bar Styling */
-.search-bar {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    animation: fadeInUp 1s ease-out;
-}
+        th {
+            font-size: 1.5rem;
+            background-color: black;
+            color: #00ff00; /* Glowing green text for heading */
+            font-weight: bold;
+        }
 
-.search-bar input {
-    padding: 12px 20px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 50px;
-    width: 250px;
-    margin-right: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: 0.3s ease;
-}
+        td {
+            font-size: 1.2rem;
+            background-color: black;
+            color: white;
+        }
 
-.search-bar input:focus {
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
+        /* Heading Styling (no animation) */
+        h1 {
+            font-size: 3rem;
+            text-align: center;
+            margin: 40px 0;
+            color: #00ff00; /* Glowing green color for heading */
+        }
 
-.search-bar button {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 50px;
-    padding: 12px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
+        /* Modal Styling */
+        #modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            animation: fadeInModal 0.3s ease-out;
+        }
 
-.search-bar button:hover {
-    background-color: #218838;
-    transform: scale(1.05);
-}
+        @keyframes fadeInModal {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
 
-/* Movie Section */
-section {
-    margin: 40px auto;
-    max-width: 1200px;
-    padding: 0 20px;
-}
+        #modalContent {
+            background-color: black;
+            padding: 30px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            animation: modalContentIn 0.5s ease-out;
+        }
 
-/* Section Headings */
-h2 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    text-align: center;
-    color: white;
-    animation: fadeIn 1s ease-out; /* Fade-in animation */
-}
+        @keyframes modalContentIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
 
-/* Movie Slider */
-.movie-slider {
-    display: flex;
-    overflow-x: auto;
-    gap: 20px;
-    padding-bottom: 20px;
-}
+        #modalContent h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
 
-.movie-card {
-    width: 220px;
-    background-color: #fff;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-align: center;
-    padding: 10px;
-    animation: fadeInCard 1s ease-out; /* Fade-in animation for cards */
-}
+        #modalText {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
 
-@keyframes fadeInCard {
-    0% {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+        /* Modal Buttons */
+        .modal-button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin: 10px;
+        }
 
-.movie-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
+        .modal-button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
 
-.movie-card img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 8px;
-    transition: transform 0.3s ease;
-}
+        /* Close Button Styling */
+        #closeModalBtn {
+            background-color: #e74c3c;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-.movie-card p {
-    margin-top: 10px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #333;
-}
+        #closeModalBtn:hover {
+            background-color: #c0392b;
+        }
 
-/* Modal Styling */
-#modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    animation: fadeInModal 0.3s ease-out;
-}
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
 
-@keyframes fadeInModal {
-    0% {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
+        /* Responsive Styling for Mobile and Tablet */
+        @media (max-width: 768px) {
+            table {
+                width: 100%;
+            }
 
-#modalContent {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    width: 80%;
-    max-width: 600px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-    text-align: center;
-    animation: modalContentIn 0.5s ease-out;
-}
+            h1 {
+                font-size: 2.5rem;
+            }
 
-@keyframes modalContentIn {
-    0% {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
+            th {
+                font-size: 1.2rem;
+            }
 
-#modalContent h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: #007bff;
-}
-
-#modalText {
-    font-size: 1.2rem;
-    color: #666;
-    margin-bottom: 20px;
-}
-
-/* Modal Buttons */
-.modal-button {
-    background-color: #007bff;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin: 10px;
-}
-
-.modal-button:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
-}
-
-/* Close Button Styling */
-#closeModalBtn {
-    background-color: #e74c3c;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#closeModalBtn:hover {
-    background-color: #c0392b;
-}
-
-footer {
-    background-color: #2c3e50;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-}
-
-/* Responsive Styling for Mobile and Tablet */
-@media (max-width: 768px) {
-    .movie-slider {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .movie-card {
-        width: 180px;
-    }
-
-    h1 {
-        font-size: 2.5rem;
-    }
-
-    h2 {
-        font-size: 1.8rem;
-    }
-
-    .search-bar input {
-        width: 200px;
-    }
-
-    .search-bar button {
-        padding: 10px 18px;
-    }
-
-    #modalContent {
-        width: 90%;
-        padding: 20px;
-    }
-}
-
-            </style>
+            td {
+                font-size: 1rem;
+            }
+        }
+    </style>
         </head>
         <body>
             <h1>${movieTitle}</h1>
