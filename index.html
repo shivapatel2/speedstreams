@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RMG Movies</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>RMG Movies</h1>
+        </div>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search your movie here...">
+            <button id="searchBtn">Search</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hindi Movies Section -->
+        <section id="hindi-movies">
+            <h2>Hindi Movies</h2>
+            <div class="movie-slider">
+                <div class="movie-card" onclick="openMoviePage('Hindi Movie 1')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwsm7R59dFD3X1IfhBrEXtsWVxo7B8fTZjWQ&s" alt="Hindi Movie 1">
+                    <p>Hindi Movie 1</p>
+                </div>
+                <div class="movie-card" onclick="openMoviePage('Hindi Movie 2')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwsm7R59dFD3X1IfhBrEXtsWVxo7B8fTZjWQ&s" alt="Hindi Movie 2">
+                    <p>Hindi Movie 2</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Punjabi Movies Section -->
+        <section id="punjabi-movies">
+            <h2>Panjabi Movies</h2>
+            <div class="movie-slider">
+                <div class="movie-card" onclick="openMoviePage('Punjabi Movie 1')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwsm7R59dFD3X1IfhBrEXtsWVxo7B8fTZjWQ&s" alt="Punjabi Movie 1">
+                    <p>Punjabi Movie 1</p>
+                </div>
+                <div class="movie-card" onclick="openMoviePage('Punjabi Movie 2')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwsm7R59dFD3X1IfhBrEXtsWVxo7B8fTZjWQ&s" alt="Punjabi Movie 2">
+                    <p>Punjabi Movie 2</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hollywood Movies Section -->
+        <section id="hollywood-movies">
+            <h2>Hollywood Movies</h2>
+            <div class="movie-slider">
+                <div class="movie-card" onclick="openMoviePage('Hollywood Movie 1')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwsm7R59dFD3X1IfhBrEXtsWVxo7B8fTZjWQ&s" alt="Hollywood Movie 1">
+                    <p>Hollywood Movie 1</p>
+                </div>
+                <div class="movie-card" onclick="openMoviePage('Hollywood Movie 2')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwsm7R59dFD3X1IfhBrEXtsWVxo7B8fTZjWQ&s" alt="Hollywood Movie 2">
+                    <p>Hollywood Movie 2</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 RMG Movies</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
