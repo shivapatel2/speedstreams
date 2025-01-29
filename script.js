@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <head>
                 <title>${movieTitle}</title>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <meta name="description" content="RMG Movies - Stream latest Hindi, Punjabi, and Hollywood movies in HD quality">
                 <style>
                     body { font-family: Arial, sans-serif; text-align: center; padding: 20px; background: #111; color: white; }
                     .container { max-width: 600px; margin: auto; padding: 20px; border-radius: 10px; background: #222; box-shadow: 0px 0px 10px rgba(255,255,255,0.2); }
