@@ -13,10 +13,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function openMoviePage(movieId, movieTitle, movieImage) {
         const movieLinks = {
-            "hindi1": {
+             /*Hindi Movies starts Here copy from "Skyforce" till }; to add new movies*/ 
+ /*change movie name,description,links in MovieLinks replacing # if series then in series link*/
+            "SkyForce": {
                 description: "A thrilling Hindi movie with an amazing storyline.",
-                movieLinks: { "480p": "#", "720p": "#", "1080p": "#" },
-                seriesLinks: { "480p": "#", "720p": "#", "1080p": "#" }
+                movieLinks: { "480p": "https://runurl.in/AjcJt0O", "720p": "https://runurl.in/AjcJt0O", "1080p": "https://runurl.in/AjcJt0O" }
             },
             "hindi2": {
                 description: "A thrilling Hindi movie with an amazing storyline.",
@@ -26,15 +27,38 @@ document.addEventListener("DOMContentLoaded", function () {
             "hindi3": {
                 description: "A thrilling Hindi movie with an amazing storyline.",
                 movieLinks: { "480p": "#", "720p": "#", "1080p": "#" },
-                seriesLinks: { "480p": "#", "720p": "#", "1080p": "#" }
+               seriesLinks: { "480p": "#", "720p": "#", "1080p": "#" }
             },
+
+  /*Pu jabi Movies starts Here copy from "punjabi1" till }; to add new movies*/ 
+  /*change movie name,description,links in MovieLinks replacing # if series then in series link*/
             "punjabi1": {
                 description: "A thrilling Punjabi movie with an amazing storyline.",
                 movieLinks: { "480p": "#.com", "720p": "#.com", "1080p": "#.com" },
                 seriesLinks: { "480p": "#", "720p": "#", "1080p": "#" }
             },
+
+ /*Hollywood Movies starts Here copy from "Hollywood1" till }; to add new movies*/
+ /*change movie name,description,links in MovieLinks replacing # if series then in series link*/
             "hollywood1": {
                 description: "An action-packed Hollywood blockbuster.",
+                movieLinks: { "480p": "#", "720p": "#", "1080p": "#" },
+                seriesLinks: { "480p": "#", "720p": "#", "1080p": "#" }
+            },
+           "hollywood2": {
+                description: "An action-packed Hollywood blockbuster.",
+                movieLinks: { "480p": "#", "720p": "#", "1080p": "#" },
+                seriesLinks: { "480p": "#", "720p": "#", "1080p": "#" }
+            },
+           "hollywood3": {
+                description: "An action-packed Hollywood blockbuster.",
+                movieLinks: { "480p": "#", "720p": "#", "1080p": "#" },
+                seriesLinks: { "480p": "#", "720p": "#", "1080p": "#" }
+            },
+/*Animes starts Here copy from "Anime1" till }; to add new movies*/
+  /*change movie name,description,links in MovieLinks replacing # if series then in series link*/
+            "Anime1": { 
+                description: "An action-packed anime movie.",
                 movieLinks: { "480p": "#", "720p": "#", "1080p": "#" },
                 seriesLinks: { "480p": "#", "720p": "#", "1080p": "#" }
             }
