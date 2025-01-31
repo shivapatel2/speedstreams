@@ -13,7 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function openMoviePage(movieId, movieTitle, movieImage) {
         const movieLinks = {
-             /*Hindi Movies starts Here copy from "Skyforce" till }; to add new movies*/ 
+             
+  /*Hindi Movies starts Here copy from "Skyforce" till }; to add new movies*/ 
  /*change movie name,description,links in MovieLinks replacing # if series then in series link*/
             "SkyForce": {
                 description: "A thrilling Hindi movie with an amazing storyline.",
@@ -63,7 +64,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 seriesLinks: { "480p": "#", "720p": "#", "1080p": "#" }
             }
         };
-
         const movieData = movieLinks[movieId];
 
         if (!movieData) {
@@ -104,6 +104,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         <button class="btn" onclick="openLinks('Series Links')">📺 Series Links</button>
                         <button class="btn" onclick="openTutorial()">📖 Tutorial</button>
                     </div>
+
+                    <button id="homeBtn" class="btn">🏠 Go to Home</button> <!-- Home Button -->
+
                 </div>
 
                 <!-- Movie & Series Links Modal -->
@@ -131,6 +134,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 <script>
                     const movieData = ${JSON.stringify(movieData)};
+
+                    // Handle Home Button Click
+                    document.getElementById("homeBtn").addEventListener("click", function() {
+                        window.location.href = "/";  // Redirect to Home Page
+                    });
 
                     function openLinks(category) {
                         const categoryKey = category.toLowerCase().includes("movie") ? "movieLinks" : "seriesLinks";
@@ -177,4 +185,106 @@ document.addEventListener("DOMContentLoaded", function () {
         movieWindow.document.write(moviePageContent);
         movieWindow.document.close();
     }
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.getElementById("searchInput");
+    const searchBtn = document.getElementById("searchBtn");
+    const movieSections = document.querySelectorAll(".movie-section");
+    const movieCards = document.querySelectorAll(".movie-card");
+    const errorMessage = document.getElementById("noResultsMessage");  // Element to display no results message
+    const fuzzySearchThreshold = 0.6;  // The threshold for fuzzy matching (adjustable)
+
+    // Function to filter movies based on the search term (fuzzy search)
+    function filterMovies(searchTerm) {
+        let foundMovie = false;
+        let matchedMovies = 0;
+
+        // Hide all movie sections initially
+        movieSections.forEach(section => {
+            section.style.display = "none"; 
+        });
+
+        // Loop through each movie card and check for matches
+        movieCards.forEach(card => {
+            const movieTitle = card.querySelector("h3").innerText.toLowerCase();
+            const movieSection = card.closest(".movie-section");
+            
+            // Check for fuzzy match
+            const similarity = calculateSimilarity(movieTitle, searchTerm.toLowerCase());
+
+            // If a fuzzy match exceeds the threshold, display the movie and its section
+            if (similarity >= fuzzySearchThreshold || movieTitle.includes(searchTerm.toLowerCase())) {
+                card.style.display = "block";  // Show the movie card
+                movieSection.style.display = "block";  // Show the section containing the card
+                foundMovie = true;  // A matching movie was found
+                matchedMovies++;
+            } else {
+                card.style.display = "none";  // Hide the movie card if no match
+            }
+        });
+
+        // Show or hide the "No results" message based on search results
+        if (!foundMovie && searchTerm !== "") {
+            errorMessage.style.display = "block";  // Show error message
+            errorMessage.innerHTML = `No exact matches found for "${searchTerm}". try again wih exact keywords.`;
+        } else if (matchedMovies > 0) {
+            errorMessage.style.display = "none";  // Hide error message if there are results
+        } else {
+            errorMessage.style.display = "none";  // Hide error message if search term is empty
+        }
+    }
+
+    // Simple function to calculate string similarity (fuzzy matching)
+    function calculateSimilarity(str1, str2) {
+        let longer = str1;
+        let shorter = str2;
+        if (str1.length < str2.length) {
+            longer = str2;
+            shorter = str1;
+        }
+
+        const longerLength = longer.length;
+        if (longerLength === 0) {
+            return 1.0;
+        }
+
+        return (longerLength - editDistance(longer, shorter)) / parseFloat(longerLength);
+    }
+
+    // Function to calculate the Levenshtein distance between two strings
+    function editDistance(a, b) {
+        const tmp = [];
+        let i, j, alen = a.length, blen = b.length, res;
+
+        for (i = 0; i <= alen; i++) {
+            tmp[i] = [i];
+        }
+
+        for (j = 0; j <= blen; j++) {
+            tmp[0][j] = j;
+        }
+
+        for (i = 1; i <= alen; i++) {
+            for (j = 1; j <= blen; j++) {
+                res = a[i - 1] === b[j - 1] ? 0 : 1;
+                tmp[i][j] = Math.min(tmp[i - 1][j] + 1, tmp[i][j - 1] + 1, tmp[i - 1][j - 1] + res);
+            }
+        }
+
+        return tmp[alen][blen];
+    }
+
+    // Event listener for the search input (real-time search while typing)
+    searchInput.addEventListener("input", function () {
+        const searchTerm = searchInput.value.toLowerCase(); // Convert the search term to lowercase
+        filterMovies(searchTerm);
+    });
+
+    // Event listener for the search button
+    searchBtn.addEventListener("click", function () {
+        const searchTerm = searchInput.value.toLowerCase(); // Get the search term from input
+        filterMovies(searchTerm);
+    });
 });
