@@ -288,5 +288,5 @@ document.addEventListener("DOMContentLoaded", function () {
         filterMovies(searchTerm);
     });
 });
-window.location.href = "https://dearestwall.github.io/rmgsmovies/";  // Redirect to Home Page
+
 
