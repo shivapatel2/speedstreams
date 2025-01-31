@@ -30,12 +30,17 @@
       <img src="https://media-hosting.imagekit.io//caeeec1ef6d142d0/IMG_20250125_212359_929.jpg?Expires=1832428628&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=OWAbI03NYfcvf-XuzIOe121bCKwyrSlB5FYRmRgx-i0yFzeoVUanawqCF~OW4N8F5rO-7bK4F81OMzCOjIo~zcpvhA1Z40FKgq8TQPMDaDQgfbGCIdiQJa7RbmJK8L277tahvSPyETrNBT6b3593otgqsOKB~xcziOxn8Tp2j-TsKhFS0uoY5LF39JXx71T-PDpk2SmETVUMIrWWMXxrv1eoyeS~elw3YqJB1haGmrSZ-PSxCv~9vUxniTUt9K~MqMkH8sjbroJWq6AICxquZaeck3MPqfeizUDghvgzdT1qoLOvW95lHw9vYpKcPHxgzsA3DGb7arKzz50oHU97-g__" alt="RMG Movies Logo" class="logo-image" loading="lazy" width="60" height="60">
       <h1>RMG Movies</h1>
     </div>
-    <!--<div class="search-bar">
+    <div class="search-bar">
 <input type="text" id="searchInput" placeholder="Search movies..." aria-label="Search movies">
- <button id="searchBtn">Search</button>  </div>  -->
+ <button id="searchBtn">Search</button>  </div>
   </header>
-
+ 
   <main>
+   
+    <div id="noResultsMessage" class="no-results-message" style="display: none;">
+    <p>No movies found matching your search term try exact keyword.</p>
+</div>
+    
     <!-- Hindi Movies Section -->
     <section class="movie-section" aria-label="Hindi Movies">
       <h2>Hindi Movies</h2>
@@ -120,14 +125,17 @@
     </a>
     <p>&copy; 2025 RMG Movies</p>
   </footer>
-
-  <!-- Movie Modal Structure -->
-  <div id="movieModal" class="modal" role="dialog" aria-hidden="true">
+ <!-- Movie Modal -->
+<div id="movieModal" class="modal">
     <div class="modal-content">
-      <button class="close-modal" aria-label="Close modal">&times;</button>
-      <div class="modal-body"></div>
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <h2 id="movieTitle"></h2>
+        <img id="movieImage" src="" alt="Movie Image">
+        <p id="movieDescription"></p>
+        <div id="movieLinks"></div>
+        <button id="homeBtn" class="btn">🏠 Go to Home</button> <!-- Home Button -->
     </div>
-  </div>
+</div>
 
   <!-- Links Modal Structure -->
   <div id="linksModal" class="modal">
