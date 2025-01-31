@@ -45,7 +45,55 @@
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
-</script>
+    // Function to perform search and display results
+    async function searchMovies() {
+      const searchQuery = document.getElementById('searchInput').value.toLowerCase();  // Get search query
+      const resultsDiv = document.getElementById('searchResults');
+      const noResultsDiv = document.getElementById('noResultsMessage');
+      resultsDiv.innerHTML = ""; // Clear previous results
+
+      // Check if search query is empty
+      if (!searchQuery) {
+        resultsDiv.innerHTML = "";
+        noResultsDiv.style.display = "none";
+        return;
+      }
+
+      // Reference to the "movies" node in Firebase
+      const moviesRef = ref(database, 'movies');
+
+      // Query for movies based on the search query
+      const movieQuery = query(moviesRef, orderByChild('title'), equalTo(searchQuery));
+
+      // Get the results from Firebase
+      const snapshot = await get(movieQuery);
+
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        let resultsHtml = "<ul>";
+
+        for (const key in data) {
+          const movie = data[key];
+          resultsHtml += `
+            <li>
+              <h3>${movie.title}</h3>
+              <p>Genre: ${movie.genre}</p>
+              <p>Year: ${movie.year}</p>
+              <img src="${movie.poster}" alt="${movie.title} Poster" width="200" height="300">
+            </li>
+          `;
+        }
+        resultsHtml += "</ul>";
+        resultsDiv.innerHTML = resultsHtml;
+        noResultsDiv.style.display = "none";
+      } else {
+        noResultsDiv.style.display = "block";  // Show no results message
+      }
+    }
+
+    // Event listener for search button
+    document.getElementById('searchBtn').addEventListener('click', searchMovies);
+  </script>
   
 </head>
 
