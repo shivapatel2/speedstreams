@@ -1,290 +1,273 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const movieCards = document.querySelectorAll(".movie-card");
+/* General styling */
+body {
+    background-color: #000; /* Dark background for neon effect */
+    color: #fff;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+}
 
-    movieCards.forEach(card => {
-        card.addEventListener("click", function () {
-            const movieId = card.dataset.movieId;
-            const movieTitle = card.querySelector("h3").innerText;
-            const movieImage = card.querySelector("img").src;
+/* General Page Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
 
-            openMoviePage(movieId, movieTitle, movieImage);
-        });
-    });
+/* Header Styling */
+header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #222;
+}
 
-    function openMoviePage(movieId, movieTitle, movieImage) {
-        const movieLinks = {
-             
-  /*Hindi Movies starts Here copy from "Skyforce" till }; to add new movies*/ 
- /*change movie name,description,links in MovieLinks replacing # if series then in series link*/
-            "SkyForce": {
-                description: "A thrilling Hindi movie with an amazing storyline.",
-                movieLinks: { "480p": "https://runurl.in/AjcJt0O", "720p": "https://runurl.in/AjcJt0O", "1080p": "https://runurl.in/AjcJt0O" }
-            },
-            "hindi2": {
-                description: "A thrilling Hindi movie with an amazing storyline.",
-                movieLinks: { "480p": "#", "720p": "#", "1080p": "#" },
-                seriesLinks: { "480p": "#", "720p": "#", "1080p": "#" }
-            },
-            "hindi3": {
-                description: "A thrilling Hindi movie with an amazing storyline.",
-                movieLinks: { "480p": "#", "720p": "#", "1080p": "#" },
-               seriesLinks: { "480p": "#", "720p": "#", "1080p": "#" }
-            },
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
-  /*Pu jabi Movies starts Here copy from "punjabi1" till }; to add new movies*/ 
-  /*change movie name,description,links in MovieLinks replacing # if series then in series link*/
-            "punjabi1": {
-                description: "A thrilling Punjabi movie with an amazing storyline.",
-                movieLinks: { "480p": "#.com", "720p": "#.com", "1080p": "#.com" },
-                seriesLinks: { "480p": "#", "720p": "#", "1080p": "#" }
-            },
+.logo img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
 
- /*Hollywood Movies starts Here copy from "Hollywood1" till }; to add new movies*/
- /*change movie name,description,links in MovieLinks replacing # if series then in series link*/
-            "hollywood1": {
-                description: "An action-packed Hollywood blockbuster.",
-                movieLinks: { "480p": "#", "720p": "#", "1080p": "#" },
-                seriesLinks: { "480p": "#", "720p": "#", "1080p": "#" }
-            },
-           "hollywood2": {
-                description: "An action-packed Hollywood blockbuster.",
-                movieLinks: { "480p": "#", "720p": "#", "1080p": "#" },
-                seriesLinks: { "480p": "#", "720p": "#", "1080p": "#" }
-            },
-           "hollywood3": {
-                description: "An action-packed Hollywood blockbuster.",
-                movieLinks: { "480p": "#", "720p": "#", "1080p": "#" },
-                seriesLinks: { "480p": "#", "720p": "#", "1080p": "#" }
-            },
-/*Animes starts Here copy from "Anime1" till }; to add new movies*/
-  /*change movie name,description,links in MovieLinks replacing # if series then in series link*/
-            "Anime1": { 
-                description: "An action-packed anime movie.",
-                movieLinks: { "480p": "#", "720p": "#", "1080p": "#" },
-                seriesLinks: { "480p": "#", "720p": "#", "1080p": "#" }
-            }
-        };
-        const movieData = movieLinks[movieId];
+.logo h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: white;
+    text-shadow: 0 0 5px blue, 0 0 10px orange, 0 0 20px blue;
+}
 
-        if (!movieData) {
-            alert("Movie details not available!");
-            return;
-        }
+.search-bar {
+    display: flex;
+    align-items: center;
+}
 
-        const moviePageContent = `
-            <html>
-            <head>
-                <title>${movieTitle}</title>
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <meta name="description" content="RMG Movies - Stream latest Hindi, Punjabi, and Hollywood movies in HD quality">
-                <style>
-                    body { font-family: Arial, sans-serif; text-align: center; padding: 20px; background: #111; color: white; }
-                    .container { max-width: 600px; margin: auto; padding: 20px; border-radius: 10px; background: #222; box-shadow: 0px 0px 10px rgba(255,255,255,0.2); }
-                    img { max-width: 100%; height: auto; border-radius: 10px; }
-                    .description { font-size: 18px; margin-top: 10px; color: #ccc; }
-                    .buttons { margin-top: 20px; }
-                    .btn { display: block; width: 100%; padding: 12px; margin: 10px 0; font-size: 16px; text-decoration: none; color: white; background: linear-gradient(45deg, #007BFF, #00D4FF); border: none; border-radius: 8px; cursor: pointer; transition: 0.3s; }
-                    .btn:hover { background: linear-gradient(45deg, #00D4FF, #007BFF); }
-                    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); }
-                    .modal-content { background: #fff; padding: 20px; margin: 10% auto; width: 80%; max-width: 400px; border-radius: 5px; color: black; text-align: left; }
-                    .close-modal { font-size: 20px; cursor: pointer; float: right; }
-                    .download-links { display: flex; flex-direction: column; align-items: center; }
-                    .download-links a { display: block; width: 80%; padding: 12px; margin-top: 8px; font-size: 16px; text-align: center; text-decoration: none; color: white; background: linear-gradient(45deg, #FF416C, #FF4B2B); border-radius: 8px; transition: 0.3s; }
-                    .download-links a:hover { background: linear-gradient(45deg, #FF4B2B, #FF416C); }
-                </style>
-            </head>
-            <body>
-                <div class="container">
-                    <h1>${movieTitle}</h1>
-                    <img src="${movieImage}" alt="${movieTitle}">
-                    <p class="description">${movieData.description}</p>
-                    
-                    <div class="buttons">
-                        <button class="btn" onclick="openLinks('Movie Links')">🎬 Movie Links</button>
-                        <button class="btn" onclick="openLinks('Series Links')">📺 Series Links</button>
-                        <button class="btn" onclick="openTutorial()">📖 Tutorial</button>
-                    </div>
+.search-bar input {
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #444;
+    background-color: #222;
+    color: #fff;
+    width: 250px;
+    max-width: 300px;
+}
 
-                    <button id="homeBtn" class="btn">🏠 Go to Home</button> <!-- Home Button -->
+.search-bar button {
+    background-color: #222;
+    color: white;
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+}
 
-                </div>
+.search-bar button:hover {
+    background-color: black;
+}
 
-                <!-- Movie & Series Links Modal -->
-                <div id="linksModal" class="modal">
-                    <div class="modal-content">
-                        <span class="close-modal" onclick="closeModal()">&times;</span>
-                        <h2 id="modalTitle"></h2>
-                        <div class="download-links" id="modalLinks"></div>
-                    </div>
-                </div>
+/* Movie Sections */
+.movie-section {
+    margin: 20px 0;
+    padding: 10px;
+}
 
-                <!-- Tutorial Modal -->
-                <div id="tutorialModal" class="modal">
-                    <div class="modal-content">
-                        <span class="close-modal" onclick="closeModal()">&times;</span>
-                        <h2>Tutorial for ${movieTitle}</h2>
-                        <h3>🎬 Tutorial for Movies</h3>
-                        <a href="#">Movie Tutorial Link 1</a>
-                        <a href="#">Movie Tutorial Link 2</a>
-                        <h3>📺 Tutorial for Series</h3>
-                        <a href="#">Series Tutorial Link 1</a>
-                        <a href="#">Series Tutorial Link 2</a>
-                    </div>
-                </div>
+.movie-section h2 {
+    font-size: 1.5rem;
+    text-align: left;
+    margin-left: 10px;
+}
 
-                <script>
-                    const movieData = ${JSON.stringify(movieData)};
+/* Movie Container */
+.movie-container {
+    overflow-x: auto;
+    display: flex;
+    padding: 10px;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
 
-                    // Handle Home Button Click
-                    document.getElementById("homeBtn").addEventListener("click", function() {
-                        window.location.href = "/";  // Redirect to Home Page
-                    });
+/* Hide scrollbar */
+.movie-container::-webkit-scrollbar {
+    display: none;
+}
 
-                    function openLinks(category) {
-                        const categoryKey = category.toLowerCase().includes("movie") ? "movieLinks" : "seriesLinks";
-                        
-                        document.getElementById("modalTitle").innerText = category;
-                        const linksContainer = document.getElementById("modalLinks");
+.movie-list {
+    display: flex;
+    gap: 10px;
+}
 
-                        if (!movieData[categoryKey]) {
-                            alert("Links not available for this category.");
-                            return;
-                        }
+/* Movie Card */
+.movie-card {
+    position: relative;
+    flex: 0 0 140px; /* Smaller size for better fit */
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
 
-                        linksContainer.innerHTML = Object.keys(movieData[categoryKey]).map(resolution => {
-                            const link = movieData[categoryKey][resolution];
-                            return \`
-                                <h3>\${resolution}</h3>
-                                <a href="\${link}" target="_blank">Download Now</a>
-                            \`;
-                        }).join("");
+.movie-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
 
-                        document.getElementById("linksModal").style.display = "block";
-                    }
+.movie-card h3 {
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
 
-                    function openTutorial() {
-                        document.getElementById("tutorialModal").style.display = "block";
-                    }
+/* Hover Effect */
+.movie-card:hover {
+    transform: scale(1.05);
+}
 
-                    function closeModal() {
-                        document.getElementById("linksModal").style.display = "none";
-                        document.getElementById("tutorialModal").style.display = "none";
-                    }
+/* Footer styling */
+footer {
+    margin-top: 50px;
+    padding: 10px;
+    background-color: #111;
+    border-top: 1px solid #333;
+    text-align: center;
+}
 
-                    window.onclick = function(event) {
-                        if (event.target.classList.contains("modal")) {
-                            closeModal();
-                        }
-                    };
-                </script>
-            </body>
-            </html>
-        `;
+footer p {
+    font-size: 1rem;
+    margin: 0;
+    color: #fff;
+}
 
-        const movieWindow = window.open("", "_blank");
-        movieWindow.document.write(moviePageContent);
-        movieWindow.document.close();
-    }
-});
+footer a {
+    display: inline-flex;
+    align-items: center;
+    color: #00ffcc;
+    text-decoration: none;
+    font-weight: bold;
+    text-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc;
+}
 
+footer a:hover {
+    text-shadow: 0 0 10px #00ffcc, 0 0 30px #00ffcc;
+}
 
-document.addEventListener("DOMContentLoaded", function () {
-    const searchInput = document.getElementById("searchInput");
-    const searchBtn = document.getElementById("searchBtn");
-    const movieSections = document.querySelectorAll(".movie-section");
-    const movieCards = document.querySelectorAll(".movie-card");
-    const errorMessage = document.getElementById("noResultsMessage");  // Element to display no results message
-    const fuzzySearchThreshold = 0.6;  // The threshold for fuzzy matching (adjustable)
+footer a img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    filter: drop-shadow(0 0 5px #00ffcc);
+}
 
-    // Function to filter movies based on the search term (fuzzy search)
-    function filterMovies(searchTerm) {
-        let foundMovie = false;
-        let matchedMovies = 0;
+/* Modal Styling */
+.modal {
+    display: none;  /* Initially hidden */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
 
-        // Hide all movie sections initially
-        movieSections.forEach(section => {
-            section.style.display = "none"; 
-        });
+.modal-content {
+    background-color: black;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
 
-        // Loop through each movie card and check for matches
-        movieCards.forEach(card => {
-            const movieTitle = card.querySelector("h3").innerText.toLowerCase();
-            const movieSection = card.closest(".movie-section");
-            
-            // Check for fuzzy match
-            const similarity = calculateSimilarity(movieTitle, searchTerm.toLowerCase());
+.home-btn {
+    background-color: #00ffcc;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 15px;
+    position: relative;
+    z-index: 99999;
+}
 
-            // If a fuzzy match exceeds the threshold, display the movie and its section
-            if (similarity >= fuzzySearchThreshold || movieTitle.includes(searchTerm.toLowerCase())) {
-                card.style.display = "block";  // Show the movie card
-                movieSection.style.display = "block";  // Show the section containing the card
-                foundMovie = true;  // A matching movie was found
-                matchedMovies++;
-            } else {
-                card.style.display = "none";  // Hide the movie card if no match
-            }
-        });
+.home-btn:hover {
+    background-color: #00cc99;
+}
 
-        // Show or hide the "No results" message based on search results
-        if (!foundMovie && searchTerm !== "") {
-            errorMessage.style.display = "block";  // Show error message
-            errorMessage.innerHTML = `No exact matches found for "${searchTerm}". try again wih exact keywords.`;
-        } else if (matchedMovies > 0) {
-            errorMessage.style.display = "none";  // Hide error message if there are results
-        } else {
-            errorMessage.style.display = "none";  // Hide error message if search term is empty
-        }
+.close-modal {
+    background-color: #e74c3c;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.close-modal:hover {
+    background-color: #c0392b;
+}
+
+/* Responsive Styling for Small Devices */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: center;
     }
 
-    // Simple function to calculate string similarity (fuzzy matching)
-    function calculateSimilarity(str1, str2) {
-        let longer = str1;
-        let shorter = str2;
-        if (str1.length < str2.length) {
-            longer = str2;
-            shorter = str1;
-        }
-
-        const longerLength = longer.length;
-        if (longerLength === 0) {
-            return 1.0;
-        }
-
-        return (longerLength - editDistance(longer, shorter)) / parseFloat(longerLength);
+    .search-bar {
+        width: 100%;
+        justify-content: center;
     }
 
-    // Function to calculate the Levenshtein distance between two strings
-    function editDistance(a, b) {
-        const tmp = [];
-        let i, j, alen = a.length, blen = b.length, res;
-
-        for (i = 0; i <= alen; i++) {
-            tmp[i] = [i];
-        }
-
-        for (j = 0; j <= blen; j++) {
-            tmp[0][j] = j;
-        }
-
-        for (i = 1; i <= alen; i++) {
-            for (j = 1; j <= blen; j++) {
-                res = a[i - 1] === b[j - 1] ? 0 : 1;
-                tmp[i][j] = Math.min(tmp[i - 1][j] + 1, tmp[i][j - 1] + 1, tmp[i - 1][j - 1] + res);
-            }
-        }
-
-        return tmp[alen][blen];
+    .search-bar input {
+        width: 80%;
     }
 
-    // Event listener for the search input (real-time search while typing)
-    searchInput.addEventListener("input", function () {
-        const searchTerm = searchInput.value.toLowerCase(); // Convert the search term to lowercase
-        filterMovies(searchTerm);
-    });
+    .search-bar button {
+        width: auto;
+    }
 
-    // Event listener for the search button
-    searchBtn.addEventListener("click", function () {
-        const searchTerm = searchInput.value.toLowerCase(); // Get the search term from input
-        filterMovies(searchTerm);
-    });
-});
+    .movie-section h2 {
+        font-size: 1.2rem;
+    }
+
+    .movie-card {
+        flex: 0 0 120px; /* Smaller size for smaller screens */
+    }
+
+    .movie-card h3 {
+        font-size: 0.8rem;
+    }
+
+    footer a {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    footer a img {
+        margin-bottom: 10px;
+    }
+}
+.no-results-message {
+    background-color: #f44336; /* Red background for error */
+    color: white; /* White text */
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    display: none; /* Hidden by default */
+}
