@@ -167,7 +167,7 @@ footer a img {
 
 /* Modal Styling */
 .modal {
-    display: none;
+    display: none;  /* Initially hidden */
     position: fixed;
     top: 0;
     left: 0;
@@ -187,6 +187,23 @@ footer a img {
     max-width: 500px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
     text-align: center;
+}
+
+.home-btn {
+    background-color: #00ffcc;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 15px;
+    position: relative;
+    z-index: 99999;
+}
+
+.home-btn:hover {
+    background-color: #00cc99;
 }
 
 .close-modal {
@@ -242,4 +259,15 @@ footer a img {
     footer a img {
         margin-bottom: 10px;
     }
+}
+.no-results-message {
+    background-color: #f44336; /* Red background for error */
+    color: white; /* White text */
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    display: none; /* Hidden by default */
 }
