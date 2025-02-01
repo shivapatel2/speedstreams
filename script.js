@@ -49,12 +49,12 @@ document.addEventListener("DOMContentLoaded", function () {
         card.style.display = "none";
       }
     });
-    if (!foundMovie && searchTerm.trim() !== "") {
-      errorMessage.style.display = "block";
-      errorMessage.innerHTML = `No matches found for "${searchTerm}". Try different keywords.`;
-    } else {
-      errorMessage.style.display = "none";
-    }
+   if (!foundMovie && searchTerm.trim() !== "") {
+  errorMessage.style.display = "block";
+  errorMessage.textContent = `No matches found for "${searchTerm}". Try different keywords.`;
+} else {
+  errorMessage.style.display = "none";
+}
   }
 
   // Jaccard Similarity for fuzzy search
