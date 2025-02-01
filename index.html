@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="RMG Movies - Stream latest Hindi, Punjabi, and Hollywood movies in HD quality">
-  <meta name="keywords" content="online movies, Hindi movies, Punjabi movies, Hollywood movies, free movie streaming">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="RMG Movies - Stream latest Hindi, Punjabi, and Hollywood movies in HD quality" />
+  <meta name="keywords" content="online movies, Hindi movies, Punjabi movies, Hollywood movies, free movie streaming" />
   <title>RMG Movies | HD Movie Streaming Platform</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
   <!-- Schema.org markup -->
   <script type="application/ld+json">
     {
@@ -22,30 +21,32 @@
       }
     }
   </script>
+  <!-- Firebase initialization using type=module remains unchanged -->
   <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyDO9ihoH3deLDICBRv7SfUrEplpUSj9RiI",
-    authDomain: "rmg-movies.firebaseapp.com",
-    databaseURL: "https://rmg-movies-default-rtdb.firebaseio.com",
-    projectId: "rmg-movies",
-    storageBucket: "rmg-movies.firebasestorage.app",
-    messagingSenderId: "273029327185",
-    appId: "1:273029327185:web:ef7661638ba0f6717bcb70",
-    measurementId: "G-WLV6Q944RC"
-  };
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyDO9ihoH3deLDICBRv7SfUrEplpUSj9RiI",
+      authDomain: "rmg-movies.firebaseapp.com",
+      databaseURL: "https://rmg-movies-default-rtdb.firebaseio.com",
+      projectId: "rmg-movies",
+      storageBucket: "rmg-movies.firebasestorage.app",
+      messagingSenderId: "273029327185",
+      appId: "1:273029327185:web:ef7661638ba0f6717bcb70",
+      measurementId: "G-WLV6Q944RC"
+    };
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-    // Function to perform search and display results
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+
+    // Function to perform search and display results (Firebase search remains unchanged)
     async function searchMovies() {
       const searchQuery = document.getElementById('searchInput').value.toLowerCase();  // Get search query
       const resultsDiv = document.getElementById('searchResults');
@@ -94,7 +95,6 @@
     // Event listener for search button
     document.getElementById('searchBtn').addEventListener('click', searchMovies);
   </script>
-  
 </head>
 
 <body>
@@ -104,15 +104,15 @@
       <h1>RMG Movies</h1>
     </div>
     <div class="search-bar">
-<input type="text" id="searchInput" placeholder="Search movies..." aria-label="Search movies">
- <button id="searchBtn">Search</button>  </div>
+      <input type="text" id="searchInput" placeholder="Search movies..." aria-label="Search movies">
+      <button id="searchBtn">Search</button>
+    </div>
   </header>
  
   <main>
-   
     <div id="noResultsMessage" class="no-results-message" style="display: none;">
-    <p>No movies found matching your search term try exact keyword.</p>
-</div>
+      <p>No movies found matching your search term try exact keyword.</p>
+    </div>
     
     <!-- Hindi Movies Section -->
     <section class="movie-section" aria-label="Hindi Movies">
@@ -128,6 +128,7 @@
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwsm7R59dFD3X1IfhBrEXtsWVxo7B8fTZjWQ&s" alt="Hindi Movie 2 Poster" width="300" height="450">
             <h3>Hindi Movie 2</h3>
           </article>
+          
           <article class="movie-card" data-movie-id="hindi3">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwsm7R59dFD3X1IfhBrEXtsWVxo7B8fTZjWQ&s" alt="Hindi Movie 3 Poster" width="300" height="450">
             <h3>Hindi Movie 3</h3>
@@ -143,12 +144,12 @@
       <h2>Punjabi Movies</h2>
       <div class="movie-container">
         <div class="movie-list">
-
+        
           <article class="movie-card" data-movie-id="punjabi1">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwsm7R59dFD3X1IfhBrEXtsWVxo7B8fTZjWQ&s" alt="Punjabi Movie 1 Poster" width="300" height="450">
             <h3>Punjabi Movie 1</h3>
           </article>
-
+          
           <!-- Repeat for other Punjabi movies -->
         </div>
       </div>
@@ -159,36 +160,42 @@
       <h2>Hollywood Movies</h2>
       <div class="movie-container">
         <div class="movie-list">
-          <!-- add Hollywood movies here-->
+         
           <article class="movie-card" data-movie-id="hollywood1">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwsm7R59dFD3X1IfhBrEXtsWVxo7B8fTZjWQ&s" alt="Hollywood Movie 1 Poster" width="300" height="450">
             <h3>Hollywood Movie 1</h3>
           </article>
+          
           <article class="movie-card" data-movie-id="hollywood2">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwsm7R59dFD3X1IfhBrEXtsWVxo7B8fTZjWQ&s" alt="Hollywood Movie 3 Poster" width="300" height="450">
             <h3>Hollywood Movie 2</h3>
           </article>
+          
           <article class="movie-card" data-movie-id="hollywood3">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwsm7R59dFD3X1IfhBrEXtsWVxo7B8fTZjWQ&s" alt="Hollywood Movie 3 Poster" width="300" height="450">
             <h3>Hollywood Movie 3</h3>
           </article>
-
+          
           <!-- Repeat for other Hollywood movies -->
         </div>
       </div>
-      <!-- Hollywood Movies Section -->
-      <section class="movie-section" aria-label="Anime">
-        <h2>Anime</h2>
-        <div class="movie-container">
-          <div class="movie-list">
-            <article class="movie-card" data-movie-id="Anime1">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwsm7R59dFD3X1IfhBrEXtsWVxo7B8fTZjWQ&s" alt="Anime 1 Poster" width="300" height="450">
-              <h3>Anime 1</h3>
-            </article>
-            <!-- Repeat for other Anime's -->
-          </div>
+    </section>
+
+    <!-- Anime Movies Section -->
+    <section class="movie-section" aria-label="Anime">
+      <h2>Anime</h2>
+      <div class="movie-container">
+        <div class="movie-list">
+       
+          <article class="movie-card" data-movie-id="Anime1">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwsm7R59dFD3X1IfhBrEXtsWVxo7B8fTZjWQ&s" alt="Anime 1 Poster" width="300" height="450">
+            <h3>Anime 1</h3>
+          </article>
+          
+          <!-- Repeat for other Anime's -->
         </div>
-      </section>
+      </div>
+    </section>
   </main>
 
   <footer>
@@ -198,17 +205,18 @@
     </a>
     <p>&copy; 2025 RMG Movies</p>
   </footer>
- <!-- Movie Modal -->
-<div id="movieModal" class="modal">
+  
+  <!-- Movie Modal -->
+  <div id="movieModal" class="modal">
     <div class="modal-content">
-        <span class="close-modal" onclick="closeModal()">&times;</span>
-        <h2 id="movieTitle"></h2>
-        <img id="movieImage" src="" alt="Movie Image">
-        <p id="movieDescription"></p>
-        <div id="movieLinks"></div>
-        <button id="homeBtn" class="btn">🏠 Go to Home</button> <!-- Home Button -->
+      <span class="close-modal" onclick="closeModal()">&times;</span>
+      <h2 id="movieTitle"></h2>
+      <img id="movieImage" src="" alt="Movie Image">
+      <p id="movieDescription"></p>
+      <div id="movieLinks"></div>
+      <button id="homeBtn" class="btn">🏠 Go to Home</button>
     </div>
-</div>
+  </div>
 
   <!-- Links Modal Structure -->
   <div id="linksModal" class="modal">
@@ -219,6 +227,7 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <!-- Defer the external JS to let HTML/CSS load first -->
+  <script defer src="script.js"></script>
 </body>
 </html>
