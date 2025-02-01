@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="RMG Movies - Stream latest Hindi, Punjabi, and Hollywood movies in HD quality" />
+  <meta name="description" content="RMG Movies - Stream latest Hindi, Punjabi, Hollywood movies in HD quality" />
   <meta name="keywords" content="online movies, Hindi movies, Punjabi movies, Hollywood movies, free movie streaming" />
   <title>RMG Movies | HD Movie Streaming Platform</title>
   <link rel="stylesheet" href="styles.css" />
@@ -21,7 +21,7 @@
       }
     }
   </script>
-  <!-- Firebase initialization using type=module remains unchanged -->
+  <!-- Firebase initialization using type=module -->
   <script type="module">
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
@@ -44,16 +44,18 @@
 
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
+    // Initialize analytics after window load to reduce blocking on initial rendering
+    window.addEventListener('load', () => {
+      getAnalytics(app);
+    });
 
-    // Function to perform search and display results (Firebase search remains unchanged)
+    // Function to perform search and display results (remains unchanged)
     async function searchMovies() {
-      const searchQuery = document.getElementById('searchInput').value.toLowerCase();  // Get search query
+      const searchQuery = document.getElementById('searchInput').value.toLowerCase();
       const resultsDiv = document.getElementById('searchResults');
       const noResultsDiv = document.getElementById('noResultsMessage');
-      resultsDiv.innerHTML = ""; // Clear previous results
+      resultsDiv.innerHTML = "";
 
-      // Check if search query is empty
       if (!searchQuery) {
         resultsDiv.innerHTML = "";
         noResultsDiv.style.display = "none";
@@ -62,17 +64,14 @@
 
       // Reference to the "movies" node in Firebase
       const moviesRef = ref(database, 'movies');
-
       // Query for movies based on the search query
       const movieQuery = query(moviesRef, orderByChild('title'), equalTo(searchQuery));
-
       // Get the results from Firebase
       const snapshot = await get(movieQuery);
 
       if (snapshot.exists()) {
         const data = snapshot.val();
         let resultsHtml = "<ul>";
-
         for (const key in data) {
           const movie = data[key];
           resultsHtml += `
@@ -88,7 +87,7 @@
         resultsDiv.innerHTML = resultsHtml;
         noResultsDiv.style.display = "none";
       } else {
-        noResultsDiv.style.display = "block";  // Show no results message
+        noResultsDiv.style.display = "block";
       }
     }
 
@@ -119,80 +118,88 @@
       <h2>Hindi Movies</h2>
       <div class="movie-container">
         <div class="movie-list">
+          
           <article class="movie-card" data-movie-id="SkyForce">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvVysvrvaHP3y_NMP9uCv_qVpE_kj3IOmz3A&s" alt="SkyForce Poster" width="300" height="450">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvVysvrvaHP3y_NMP9uCv_qVpE_kj3IOmz3A&s" alt="SkyForce Poster" width="300" height="450" loading="lazy">
             <h3>SkyForce</h3>
           </article>
 
           <article class="movie-card" data-movie-id="hindi2">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwsm7R59dFD3X1IfhBrEXtsWVxo7B8fTZjWQ&s" alt="Hindi Movie 2 Poster" width="300" height="450">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwsm7R59dFD3X1IfhBrEXtsWVxo7B8fTZjWQ&s" alt="Hindi Movie 2 Poster" width="300" height="450" loading="lazy">
             <h3>Hindi Movie 2</h3>
           </article>
           
           <article class="movie-card" data-movie-id="hindi3">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwsm7R59dFD3X1IfhBrEXtsWVxo7B8fTZjWQ&s" alt="Hindi Movie 3 Poster" width="300" height="450">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwsm7R59dFD3X1IfhBrEXtsWVxo7B8fTZjWQ&s" alt="Hindi Movie 3 Poster" width="300" height="450" loading="lazy">
             <h3>Hindi Movie 3</h3>
           </article>
-
+        
           <!-- Repeat for other Hindi movies -->
+       
         </div>
       </div>
     </section>
 
     <!-- Punjabi Movies Section -->
+    
     <section class="movie-section" aria-label="Punjabi Movies">
       <h2>Punjabi Movies</h2>
       <div class="movie-container">
         <div class="movie-list">
-        
+          
           <article class="movie-card" data-movie-id="punjabi1">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwsm7R59dFD3X1IfhBrEXtsWVxo7B8fTZjWQ&s" alt="Punjabi Movie 1 Poster" width="300" height="450">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwsm7R59dFD3X1IfhBrEXtsWVxo7B8fTZjWQ&s" alt="Punjabi Movie 1 Poster" width="300" height="450" loading="lazy">
             <h3>Punjabi Movie 1</h3>
           </article>
-          
+         
           <!-- Repeat for other Punjabi movies -->
+      
         </div>
       </div>
     </section>
 
     <!-- Hollywood Movies Section -->
+   
     <section class="movie-section" aria-label="Hollywood Movies">
       <h2>Hollywood Movies</h2>
       <div class="movie-container">
         <div class="movie-list">
-         
+        
           <article class="movie-card" data-movie-id="hollywood1">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwsm7R59dFD3X1IfhBrEXtsWVxo7B8fTZjWQ&s" alt="Hollywood Movie 1 Poster" width="300" height="450">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwsm7R59dFD3X1IfhBrEXtsWVxo7B8fTZjWQ&s" alt="Hollywood Movie 1 Poster" width="300" height="450" loading="lazy">
             <h3>Hollywood Movie 1</h3>
           </article>
-          
+         
           <article class="movie-card" data-movie-id="hollywood2">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwsm7R59dFD3X1IfhBrEXtsWVxo7B8fTZjWQ&s" alt="Hollywood Movie 3 Poster" width="300" height="450">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwsm7R59dFD3X1IfhBrEXtsWVxo7B8fTZjWQ&s" alt="Hollywood Movie 2 Poster" width="300" height="450" loading="lazy">
             <h3>Hollywood Movie 2</h3>
           </article>
-          
+        
           <article class="movie-card" data-movie-id="hollywood3">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwsm7R59dFD3X1IfhBrEXtsWVxo7B8fTZjWQ&s" alt="Hollywood Movie 3 Poster" width="300" height="450">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwsm7R59dFD3X1IfhBrEXtsWVxo7B8fTZjWQ&s" alt="Hollywood Movie 3 Poster" width="300" height="450" loading="lazy">
             <h3>Hollywood Movie 3</h3>
           </article>
-          
+         
           <!-- Repeat for other Hollywood movies -->
+       
         </div>
       </div>
     </section>
 
     <!-- Anime Movies Section -->
+   
     <section class="movie-section" aria-label="Anime">
       <h2>Anime</h2>
       <div class="movie-container">
         <div class="movie-list">
-       
+        
           <article class="movie-card" data-movie-id="Anime1">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwsm7R59dFD3X1IfhBrEXtsWVxo7B8fTZjWQ&s" alt="Anime 1 Poster" width="300" height="450">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwsm7R59dFD3X1IfhBrEXtsWVxo7B8fTZjWQ&s" alt="Anime 1 Poster" width="300" height="450" loading="lazy">
             <h3>Anime 1</h3>
           </article>
-          
+         
           <!-- Repeat for other Anime's -->
+       
         </div>
       </div>
     </section>
@@ -227,7 +234,17 @@
     </div>
   </div>
 
-  <!-- Defer the external JS to let HTML/CSS load first -->
+  <!-- (Optional) Dynamically load GTM after main content loads to reduce initial blocking -->
+  <script>
+    window.addEventListener('load', function () {
+      const gtmScript = document.createElement('script');
+      gtmScript.async = true;
+      gtmScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-WLV6Q944RC&l=dataLayer';
+      document.body.appendChild(gtmScript);
+    });
+  </script>
+
+  <!-- Defer external JS -->
   <script defer src="script.js"></script>
 </body>
 </html>
