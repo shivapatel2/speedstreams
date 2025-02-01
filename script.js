@@ -1,5 +1,5 @@
 // --- Utility: Debounce Function ---
-// This function delays the execution of a callback until a specified wait time has passed.
+// Delays execution of a callback until after the wait time has passed.
 function debounce(func, wait) {
   let timeout;
   return function (...args) {
@@ -30,10 +30,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const errorMessage = document.getElementById("noResultsMessage");
   const fuzzySearchThreshold = 0.6;
 
-  // Filter movies based on search term using Jaccard Similarity
+  // Filter movies based on search term using Jaccard Similarity.
   function filterMovies(searchTerm) {
     let foundMovie = false;
-    // Hide all movie sections initially
+    // Hide all movie sections initially.
     movieSections.forEach((section) => {
       section.style.display = "none";
     });
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Jaccard Similarity for fuzzy search
+  // Jaccard Similarity for fuzzy search.
   function jaccardSimilarity(str1, str2) {
     const set1 = new Set(str1);
     const set2 = new Set(str2);
@@ -65,12 +65,11 @@ document.addEventListener("DOMContentLoaded", function () {
     return intersection.size / (set1.size + set2.size - intersection.size);
   }
 
-  // Create a debounced version of the filterMovies function to reduce main-thread blocking.
+  // Debounced version of filterMovies to reduce main-thread work.
   const debouncedFilterMovies = debounce(() => {
     filterMovies(searchInput.value.toLowerCase());
   }, 300);
 
-  // Use the debounced function for input and keypress events.
   searchInput.addEventListener("input", debouncedFilterMovies);
   searchBtn.addEventListener("click", debouncedFilterMovies);
   searchInput.addEventListener("keypress", function (event) {
