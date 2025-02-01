@@ -1,7 +1,17 @@
+// --- Utility: Debounce Function ---
+// This function delays the execution of a callback until a specified wait time has passed.
+function debounce(func, wait) {
+  let timeout;
+  return function (...args) {
+    const context = this;
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(context, args), wait);
+  };
+}
+
 // --- Movie Card Click & Search Functionality ---
-// Use event delegation for movie card clicks.
 document.addEventListener("DOMContentLoaded", function () {
-  // Event delegation for movie cards
+  // Event delegation for movie card clicks.
   document.body.addEventListener("click", function (event) {
     const card = event.target.closest(".movie-card");
     if (card) {
@@ -24,10 +34,10 @@ document.addEventListener("DOMContentLoaded", function () {
   function filterMovies(searchTerm) {
     let foundMovie = false;
     // Hide all movie sections initially
-    movieSections.forEach(section => {
+    movieSections.forEach((section) => {
       section.style.display = "none";
     });
-    movieCards.forEach(card => {
+    movieCards.forEach((card) => {
       const title = card.querySelector("h3").innerText.toLowerCase();
       const section = card.closest(".movie-section");
       const similarity = jaccardSimilarity(title, searchTerm.toLowerCase());
@@ -51,19 +61,21 @@ document.addEventListener("DOMContentLoaded", function () {
   function jaccardSimilarity(str1, str2) {
     const set1 = new Set(str1);
     const set2 = new Set(str2);
-    const intersection = new Set([...set1].filter(x => set2.has(x)));
+    const intersection = new Set([...set1].filter((x) => set2.has(x)));
     return intersection.size / (set1.size + set2.size - intersection.size);
   }
 
-  searchInput.addEventListener("input", function () {
+  // Create a debounced version of the filterMovies function to reduce main-thread blocking.
+  const debouncedFilterMovies = debounce(() => {
     filterMovies(searchInput.value.toLowerCase());
-  });
-  searchBtn.addEventListener("click", function () {
-    filterMovies(searchInput.value.toLowerCase());
-  });
+  }, 300);
+
+  // Use the debounced function for input and keypress events.
+  searchInput.addEventListener("input", debouncedFilterMovies);
+  searchBtn.addEventListener("click", debouncedFilterMovies);
   searchInput.addEventListener("keypress", function (event) {
     if (event.key === "Enter") {
-      filterMovies(searchInput.value.toLowerCase());
+      debouncedFilterMovies();
     }
   });
 });
@@ -71,49 +83,59 @@ document.addEventListener("DOMContentLoaded", function () {
 // --- Movie Page & Modal Handling ---
 function openMoviePage(movieId, movieTitle, movieImage) {
   const movieLinks = {
-      /*Hindi Movies starts Here copy from "Skyforce" till }; to add new movies*/ 
+     /*Hindi Movies starts Here copy from "Skyforce" till }; to add new movies*/ 
       /*change movie name,description,links in MovieLinks replacing # if series then in series link*/
-    "SkyForce": {
+    SkyForce: {
       description: "A thrilling Hindi movie with an amazing storyline.",
       movieLinks: { "480p": "https://runurl.in/AjcJt0O", "720p": "https://runurl.in/AjcJt0O", "1080p": "https://runurl.in/AjcJt0O" }
     },
-    "hindi2": {
+   
+    hindi2: {
       description: "A thrilling Hindi movie with an amazing storyline.",
       movieLinks: { "480p": "#", "720p": "#", "1080p": "#" },
       seriesLinks: { "480p": "#", "720p": "#", "1080p": "#" }
     },
-    "hindi3": {
+    
+    hindi3: {
       description: "A thrilling Hindi movie with an amazing storyline.",
       movieLinks: { "480p": "#", "720p": "#", "1080p": "#" },
       seriesLinks: { "480p": "#", "720p": "#", "1080p": "#" }
     },
-        /*Punjabi Movies starts Here copy from "punjabi1" till }; to add new movies*/ 
+   
+     /*Punjabi Movies starts Here copy from "punjabi1" till }; to add new movies*/ 
       /*change movie name,description,links in MovieLinks replacing # if series then in series link*/
-    "punjabi1": {
+    
+    punjabi1: {
       description: "A thrilling Punjabi movie with an amazing storyline.",
       movieLinks: { "480p": "#.com", "720p": "#.com", "1080p": "#.com" },
       seriesLinks: { "480p": "#", "720p": "#", "1080p": "#" }
     },
-        /*Hollywood Movies starts Here copy from "Hollywood1" till }; to add new movies*/ 
+   
+    /*Hollywood Movies starts Here copy from "Hollywood1" till }; to add new movies*/ 
       /*change movie name,description,links in MovieLinks replacing # if series then in series link*/
-    "hollywood1": {
+    
+    hollywood1: {
       description: "An action-packed Hollywood blockbuster.",
       movieLinks: { "480p": "#", "720p": "#", "1080p": "#" },
       seriesLinks: { "480p": "#", "720p": "#", "1080p": "#" }
     },
-    "hollywood2": {
+   
+    hollywood2: {
       description: "An action-packed Hollywood blockbuster.",
       movieLinks: { "480p": "#", "720p": "#", "1080p": "#" },
       seriesLinks: { "480p": "#", "720p": "#", "1080p": "#" }
     },
-    "hollywood3": {
+   
+    hollywood3: {
       description: "An action-packed Hollywood blockbuster.",
       movieLinks: { "480p": "#", "720p": "#", "1080p": "#" },
       seriesLinks: { "480p": "#", "720p": "#", "1080p": "#" }
     },
-        /*Anime's starts Here copy from "Anime1" till }; to add new movies*/ 
+    
+    /*Anime's starts Here copy from "Anime1" till }; to add new movies*/ 
       /*change movie name,description,links in MovieLinks replacing # if series then in series link*/
-    "Anime1": {
+    
+    Anime1: {
       description: "An action-packed anime movie.",
       movieLinks: { "480p": "#", "720p": "#", "1080p": "#" },
       seriesLinks: { "480p": "#", "720p": "#", "1080p": "#" }
