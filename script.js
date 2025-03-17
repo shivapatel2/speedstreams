@@ -155,7 +155,7 @@ function openMoviePage(movieId, movieTitle, movieImage) {
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="description" content="RMG Movies - Stream latest Hindi, Punjabi, Hollywood movies in HD quality">
+      <meta name="description" content="SPEED Movies - Stream latest Hindi, Punjabi, Hollywood movies in HD quality">
       <title>${movieTitle}</title>
       <style>
         body { font-family: Arial, sans-serif; text-align: center; padding: 20px; background: #111; color: white; }
@@ -211,7 +211,7 @@ function openMoviePage(movieId, movieTitle, movieImage) {
         const movieData = ${JSON.stringify(movieData)};
         // Updated Home Button event: Explicitly redirect to the homepage URL.
         document.getElementById("homeBtn").addEventListener("click", function() {
-          window.location.href = "https://dearestwall.github.io/rmgsmovies/";  // Replace with your actual homepage URL
+          window.location.href = "";  // Replace with your actual homepage URL
         });
         function openLinks(category) {
           const categoryKey = category.toLowerCase().includes("movie") ? "movieLinks" : "seriesLinks";
