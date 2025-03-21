@@ -133,6 +133,12 @@ function openMoviePage(movieId, movieTitle, movieImage) {
       movieLinks: { "480p": "#", "720p": "#", "1080p": "#" },
       seriesLinks: { "480p": "#", "720p": "#", "1080p": "#" }
     },
+
+    RCBvsKKR: {
+      description: "Watch the thrilling IPL match between RCB and KKR.",
+      category: "ipl",
+      movieLinks: { "480p": "#", "720p": "#", "1080p": "#" }
+    },
     
     /*Anime's starts Here copy from "Anime1" till }; to add new movies*/ 
       /*change movie name,description,links in MovieLinks replacing # if series then in series link*/
@@ -150,50 +156,130 @@ function openMoviePage(movieId, movieTitle, movieImage) {
     return;
   }
   const moviePageContent = `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="description" content="SPEED Movies - Stream latest Hindi, Punjabi, Hollywood movies in HD quality">
-      <title>${movieTitle}</title>
-      <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; background: #111; color: white; }
-        .container { max-width: 600px; margin: auto; padding: 20px; border-radius: 10px; background: #222; box-shadow: 0px 0px 10px rgba(255,255,255,0.2); }
-        img { max-width: 100%; height: auto; border-radius: 10px; }
-        .description { font-size: 18px; margin-top: 10px; color: #ccc; }
-        .buttons { margin-top: 20px; }
-        .btn { display: block; width: 100%; padding: 12px; margin: 10px 0; font-size: 16px; text-decoration: none; color: white; background: linear-gradient(45deg, #007BFF, #00D4FF); border: none; border-radius: 8px; cursor: pointer; transition: 0.3s; }
-        .btn:hover { background: linear-gradient(45deg, #00D4FF, #007BFF); }
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); }
-        .modal-content { background: #fff; padding: 20px; margin: 10% auto; width: 80%; max-width: 400px; border-radius: 5px; color: black; text-align: left; }
-        .close-modal { font-size: 20px; cursor: pointer; float: right; }
-        .download-links { display: flex; flex-direction: column; align-items: center; }
-        .download-links a { display: block; width: 80%; padding: 12px; margin-top: 8px; font-size: 16px; text-align: center; text-decoration: none; color: white; background: linear-gradient(45deg, #FF416C, #FF4B2B); border-radius: 8px; transition: 0.3s; }
-        .download-links a:hover { background: linear-gradient(45deg, #FF4B2B, #FF416C); }
-      </style>
-    </head>
-    <body>
-      <div class="container">
-        <h1>${movieTitle}</h1>
-        <img src="${movieImage}" alt="${movieTitle}">
-        <p class="description">${movieData.description}</p>
-        <div class="buttons">
-          <button class="btn" onclick="openLinks('Movie Links')">🎬 Movie Links</button>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SPEED Movies - Stream latest Hindi, Punjabi, Hollywood movies in HD quality">
+    <title>${movieTitle}</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 20px;
+        background: #111;
+        color: white;
+      }
+      .container {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        border-radius: 10px;
+        background: #222;
+        box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+      }
+      .description {
+        font-size: 18px;
+        margin-top: 10px;
+        color: #ccc;
+      }
+      .buttons {
+        margin-top: 20px;
+      }
+      .btn {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        font-size: 16px;
+        text-decoration: none;
+        color: white;
+        background: linear-gradient(45deg, #007BFF, #00D4FF);
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .btn:hover {
+        background: linear-gradient(45deg, #00D4FF, #007BFF);
+      }
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+      }
+      .modal-content {
+        background: #fff;
+        padding: 20px;
+        margin: 10% auto;
+        width: 80%;
+        max-width: 400px;
+        border-radius: 5px;
+        color: black;
+        text-align: left;
+      }
+      .close-modal {
+        font-size: 20px;
+        cursor: pointer;
+        float: right;
+      }
+      .download-links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .download-links a {
+        display: block;
+        width: 80%;
+        padding: 12px;
+        margin-top: 8px;
+        font-size: 16px;
+        text-align: center;
+        text-decoration: none;
+        color: white;
+        background: linear-gradient(45deg, #FF416C, #FF4B2B);
+        border-radius: 8px;
+        transition: 0.3s;
+      }
+      .download-links a:hover {
+        background: linear-gradient(45deg, #FF4B2B, #FF416C);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>${movieTitle}</h1>
+      <img src="${movieImage}" alt="${movieTitle}">
+      <p class="description">${movieData.description}</p>
+      <div class="buttons">
+        <button class="btn" onclick="openLinks('Movie Links')">🎬 PLAY IT FOR FREE</button>
+        ${movieData.category !== 'ipl' ? `
           <button class="btn" onclick="openLinks('Series Links')">📺 Series Links</button>
           <button class="btn" onclick="openTutorial()">📖 Tutorial</button>
-        </div>
-        <button id="homeBtn" class="btn">🏠 Go to Home</button>
+        ` : ''}
       </div>
+      <button id="homeBtn" class="btn">🏠 Go to Home</button>
+    </div>
 
-      <div id="linksModal" class="modal">
-        <div class="modal-content">
-          <span class="close-modal" onclick="closeModal()">×</span>
-          <h2 id="modalTitle"></h2>
-          <div class="download-links" id="modalLinks"></div>
-        </div>
+    <div id="linksModal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">×</span>
+        <h2 id="modalTitle"></h2>
+        <div class="download-links" id="modalLinks"></div>
       </div>
+    </div>
 
+    ${movieData.category !== 'ipl' ? `
       <div id="tutorialModal" class="modal">
         <div class="modal-content">
           <span class="close-modal" onclick="closeModal()">×</span>
@@ -206,21 +292,43 @@ function openMoviePage(movieId, movieTitle, movieImage) {
           <a href="#">Series Tutorial Link 2</a>
         </div>
       </div>
+    ` : ''}
 
-      <script>
-        const movieData = ${JSON.stringify(movieData)};
-        // Updated Home Button event: Explicitly redirect to the homepage URL.
-        document.getElementById("homeBtn").addEventListener("click", function() {
-          window.location.href = "";  // Replace with your actual homepage URL
-        });
-        function openLinks(category) {
-          const categoryKey = category.toLowerCase().includes("movie") ? "movieLinks" : "seriesLinks";
+    <script>
+      const movieData = ${JSON.stringify(movieData)};
+      document.getElementById("homeBtn").addEventListener("click", function() {
+        window.location.href = "";  // Replace with your actual homepage URL
+      });
+
+      function openLinks(category) {
+        const categoryKey = category.toLowerCase().includes("movie") ? "movieLinks" : "seriesLinks";
+        const linksContainer = document.getElementById("modalLinks");
+
+        if (!movieData[categoryKey]) {
+          alert("Links not available for this category.");
+          return;
+        }
+
+        // Clear existing links
+        linksContainer.innerHTML = "";
+
+        if (movieData.category === "ipl") {
+          // For IPL category, show a single "PLAY NOW" button
+          document.getElementById("modalTitle").innerText = "PLAY NOW";
+
+          const playNowButton = document.createElement("button");
+          playNowButton.className = "btn";
+          playNowButton.innerText = "▶️ PLAY NOW";
+          playNowButton.onclick = function () {
+            const link = Object.values(movieData[categoryKey])[0]; // Use the first available link
+            window.open(link, "_blank");
+          };
+
+          linksContainer.appendChild(playNowButton);
+        } else {
+          // For other categories, show multiple resolution links
           document.getElementById("modalTitle").innerText = category;
-          const linksContainer = document.getElementById("modalLinks");
-          if (!movieData[categoryKey]) {
-            alert("Links not available for this category.");
-            return;
-          }
+
           linksContainer.innerHTML = Object.keys(movieData[categoryKey]).map(resolution => {
             const link = movieData[categoryKey][resolution];
             return \`
@@ -228,24 +336,29 @@ function openMoviePage(movieId, movieTitle, movieImage) {
               <a href="\${link}" target="_blank">Download Now</a>
             \`;
           }).join("");
-          document.getElementById("linksModal").style.display = "block";
         }
-        function openTutorial() {
-          document.getElementById("tutorialModal").style.display = "block";
+
+        document.getElementById("linksModal").style.display = "block";
+      }
+
+      function openTutorial() {
+        document.getElementById("tutorialModal").style.display = "block";
+      }
+
+      function closeModal() {
+        document.getElementById("linksModal").style.display = "none";
+        document.getElementById("tutorialModal").style.display = "none";
+      }
+
+      window.onclick = function(event) {
+        if (event.target.classList.contains("modal")) {
+          closeModal();
         }
-        function closeModal() {
-          document.getElementById("linksModal").style.display = "none";
-          document.getElementById("tutorialModal").style.display = "none";
-        }
-        window.onclick = function(event) {
-          if (event.target.classList.contains("modal")) {
-            closeModal();
-          }
-        };
-      </script>
-    </body>
-    </html>
-  `;
+      };
+    </script>
+  </body>
+  </html>
+`;
   const movieWindow = window.open("", "_blank");
   movieWindow.document.write(moviePageContent);
   movieWindow.document.close();
