@@ -138,17 +138,17 @@ function openMoviePage(movieId, movieTitle, movieImage) {
       description: "Watch the thrilling IPL match between RCB and KKR.",
       category: "ipl",
       movieLinks: { "480p": "#", "720p": "#", "1080p": "#" }
-    },
-    
+    }
+      };
     /*Anime's starts Here copy from "Anime1" till }; to add new movies*/ 
       /*change movie name,description,links in MovieLinks replacing # if series then in series link*/
     
-    Anime1: {
+    /*Anime1: {
       description: "An action-packed anime movie.",
       movieLinks: { "480p": "#", "720p": "#", "1080p": "#" },
       seriesLinks: { "480p": "#", "720p": "#", "1080p": "#" }
-    }
-  };
+    }*/
+
   
   const movieData = movieLinks[movieId];
   if (!movieData) {
